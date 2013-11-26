@@ -5,7 +5,6 @@
 function nextLine(e) {
 	if (e.keyCode === 13) {
 		var command = document.getElementById("input").value;
-		console.log("got the input");
 		document.getElementById("input").readOnly = true;
 		executeCommand(command);
 	}
