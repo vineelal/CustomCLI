@@ -6,7 +6,7 @@
 	<display-name>Archetype Created Web Application</display-name>
 	<servlet>
 		<servlet-name>ExecuteServlet</servlet-name>
-		<servlet-class>jgit.ExecuteServlet</servlet-class>
+		<servlet-class>com.imaginea.jgit.ExecuteServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
