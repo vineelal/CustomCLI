@@ -16,5 +16,5 @@ Presently we support the following commands
 Steps to be followed after the project is clone
 
  * Go to the project directory and execute 'mvn jetty:run' command
- * Type the following the browser "http:\\localhost:8080\jgit"
+ * Type the following in the browser "http:\\localhost:8080\jgit"
      
