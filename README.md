@@ -10,7 +10,11 @@ Presently we support the following commands
   * git clone uri
   * git clone uri directory
   
-  
+#####Installation
+
+Download all the dependencies by executing "mvn install" command in the project root directory.
+
+
 #####Running
 
 Steps to be followed after the project is clone
