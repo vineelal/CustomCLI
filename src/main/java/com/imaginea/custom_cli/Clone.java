@@ -11,7 +11,8 @@ import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.TransportException;
 
 public class Clone {
-	String uri_regexp = "(git|ssh|ftps?|https?).\\/.*\\.git";
+	// String uri_regexp = "(git|ssh|rsync|ftps?|https?).\\/.*\\.git";
+	String uri_regexp = "(git|ssh|rsync|ftps?|https?)(.\\/|\\@).*\\.git";
 	String clone_regexp = "git\\sclone";
 	String directoryNotPresent_regexp = "\\.git$";
 	String directory_regexp = "\\.git\\s.*";
@@ -21,15 +22,16 @@ public class Clone {
 	Pattern pattern = null;
 	Matcher matcher = null;
 
-	public void setURI(String command) {
+	private void setURI(String command) {
 		pattern = Pattern.compile(uri_regexp);
 		matcher = pattern.matcher(command);
 		if (matcher.find()) {
 			cloneCommand.setURI(matcher.group());
+			System.out.println(matcher.group());
 		}
 	}
 
-	public void setDirectory(String command) {
+	private void setDirectory(String command) {
 		pattern = Pattern.compile(directoryNotPresent_regexp);
 		matcher = pattern.matcher(command);
 		if (!matcher.find()) {
@@ -42,22 +44,26 @@ public class Clone {
 		}
 	}
 
-	public void setOptions(String command) {
+	private void setOptions(String command) {
 		setURI(command);
 		setDirectory(command);
 	}
 
 	public String clone(String command) {
 		setOptions(command);
+		System.out.println("user" + System.getenv("USER"));
+		System.out.println("user" + System.getenv("HOSTNAME"));
+		System.out.println(System.getenv());
 		try {
 			git = cloneCommand.call();
+			System.out.println(git);
 			System.out.println("successfully cloned");
 		} catch (InvalidRemoteException e) {
-			e.printStackTrace();
+			return "Invalid Remote";
 		} catch (TransportException e) {
-			e.printStackTrace();
+			return "Transport operation failed";
 		} catch (GitAPIException e) {
-			e.printStackTrace();
+			return "Git API Exception";
 		}
 		return "Cloned......";
 	}

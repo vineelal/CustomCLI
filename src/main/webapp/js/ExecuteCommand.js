@@ -41,7 +41,7 @@ function executeCommand(input) {
 function addNewLine(){
 	var div = document.createElement("div");
 	div.setAttribute("id", "user");
-	var text = document.createTextNode("vineelal@vineela-l:~$");
+	var text = document.createTextNode("pramati@pramati:~$");
 	var input = document.createElement("input");
 	// input.setAttribute("onkeypress",nextLine(e));
 	// input.onkeypress = nextLine(e);
