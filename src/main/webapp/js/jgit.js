@@ -12,11 +12,9 @@ function nextLine(e) {
 
 function getXmlHttpRequestObject() {
 	if (window.XMLHttpRequest) {
-		return new XMLHttpRequest(); // To support the browsers IE7+,
-										// Firefox, Chrome, Opera, Safari
+		return new XMLHttpRequest(); 
 	} else if (window.ActiveXObject) {
-		return new ActiveXObject("Microsoft.XMLHTTP"); // For the browsers IE6,
-														// IE5
+		return new ActiveXObject("Microsoft.XMLHTTP"); 
 	} else {
 		alert("Error due to old verion of browser upgrade your browser");
 	}
@@ -29,6 +27,8 @@ function executeCommand(input) {
 	  {
 	  if (rcvReq.readyState==4 && rcvReq.status==200)
 	    {
+		  var loc = window.location.pathname;
+		  console.log(loc);
 		  document.getElementById("output").value = rcvReq.responseText;
 		  document.getElementById("output").readOnly = true;
 		  addNewLine();
