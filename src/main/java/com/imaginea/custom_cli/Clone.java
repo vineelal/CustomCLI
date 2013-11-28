@@ -15,7 +15,6 @@ public class Clone {
 	String clone_regexp = "git\\sclone";
 	String directoryNotPresent_regexp = "\\.git$";
 	String directory_regexp = "\\.git\\s.*";
-	Boolean cloned = false;
 
 	Git git = null;
 	CloneCommand cloneCommand = Git.cloneRepository();
@@ -50,7 +49,6 @@ public class Clone {
 
 	public String clone(String command) {
 		setOptions(command);
-		cloned = true;
 		try {
 			git = cloneCommand.call();
 			System.out.println("successfully cloned");
@@ -61,7 +59,6 @@ public class Clone {
 		} catch (GitAPIException e) {
 			e.printStackTrace();
 		}
-		String message = cloned ? "Cloned......":"Not cloned";
-		return message;
+		return "Cloned......";
 	}
 }
