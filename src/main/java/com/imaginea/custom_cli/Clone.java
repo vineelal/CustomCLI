@@ -51,12 +51,8 @@ public class Clone {
 
 	public String clone(String command) {
 		setOptions(command);
-		System.out.println("user" + System.getenv("USER"));
-		System.out.println("user" + System.getenv("HOSTNAME"));
-		System.out.println(System.getenv());
 		try {
 			git = cloneCommand.call();
-			System.out.println(git);
 			System.out.println("successfully cloned");
 		} catch (InvalidRemoteException e) {
 			return "Invalid Remote";
