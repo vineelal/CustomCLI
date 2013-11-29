@@ -2,6 +2,8 @@ package com.imaginea.custom_cli;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ExecuteServlet extends HttpServlet {
 	private String message;
+	String userName = System.getenv("USER");
+	String machineName = null;
+
+	public void init() throws ServletException {
+		try {
+			machineName = InetAddress.getLocalHost().getHostName();
+		} catch (UnknownHostException e) {
+			machineName = "localhost";
+		}
+	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -26,5 +38,11 @@ public class ExecuteServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println(message);
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		out.println(userName + "@" + machineName + ":~$");
 	}
 }
