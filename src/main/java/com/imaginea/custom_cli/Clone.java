@@ -8,6 +8,7 @@ import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
+import org.eclipse.jgit.api.errors.JGitInternalException;
 import org.eclipse.jgit.api.errors.TransportException;
 
 public class Clone {
@@ -60,6 +61,8 @@ public class Clone {
 			return "Transport operation failed";
 		} catch (GitAPIException e) {
 			return "Git API Exception";
+		} catch (JGitInternalException e){
+			return "Destination path already exists and is not an empty directory";
 		}
 		return "Cloned......";
 	}
