@@ -17,8 +17,8 @@ Download all the dependencies by executing <code>"mvn install"</code> command in
 
 #####Running
 
-Steps to be followed after the project is clone
+Steps to be followed after the project is cloned
 
- * Go to the project directory and execute <code>'mvn jetty:run'</code> command
- * Type the following in the browser <code>"http:\\localhost:8080\jgit"<code>
+ * Go to the project directory and execute <code>"mvn jetty:run"</code> command
+ * Type the following in the browser <code>"http:\\localhost:8080\jgit"</code> and run it.
      
