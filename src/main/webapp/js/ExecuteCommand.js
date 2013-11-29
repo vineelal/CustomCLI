@@ -50,6 +50,7 @@ function addNewLine() {
 	div.setAttribute("id", "terminal");
 	var promptText = document.createElement("span");
 	promptText.innerHTML = prompt;
+	promptText.setAttribute("id","prompt");
 	var input = document.createElement("input");
 	input.setAttribute("id", "cmd");
 	// input.setAttribute("onkeypress",nextLine(e));
