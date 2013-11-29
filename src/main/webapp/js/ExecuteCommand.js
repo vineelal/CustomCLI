@@ -3,7 +3,6 @@
  */
 
 var prompt = "pramati@pramati:~$";
-var temp = null;
 var rcvReq = getXmlHttpRequestObject();
 
 function getPrompt() {
@@ -20,7 +19,7 @@ function getPrompt() {
 function nextLine(e) {
 	if (e.keyCode === 13) {
 		var command = document.getElementById("cmd").value;
-		document.getElementById("cmd").readOnly = true;
+		command.readOnly = true;
 		executeCommand(command);
 	}
 }
@@ -49,7 +48,8 @@ function executeCommand(input) {
 function addNewLine() {
 	var div = document.createElement("div");
 	div.setAttribute("id", "terminal");
-	var text = document.createTextNode(prompt);
+	var promptText = document.createElement("span");
+	promptText.innerHTML = prompt;
 	var input = document.createElement("input");
 	input.setAttribute("id", "cmd");
 	// input.setAttribute("onkeypress",nextLine(e));
@@ -57,9 +57,9 @@ function addNewLine() {
 	input.addEventListener("onkeypress", function() {
 		nextLine(event)
 	}, false);
-	var output = document.createElement("input");
+	var output = document.createElement("span");
 	output.setAttribute("id", "output-message");
-	div.appendChild(text);
+	div.appendChild(promptText);
 	div.appendChild(input);
 	div.appendChild(output);
 	document.body.appendChild(div);
