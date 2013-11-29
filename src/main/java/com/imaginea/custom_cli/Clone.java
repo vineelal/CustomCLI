@@ -17,6 +17,7 @@ public class Clone {
 	String clone_regexp = "git\\sclone";
 	String directoryNotPresent_regexp = "\\.git$";
 	String directory_regexp = "\\.git\\s.*";
+	String repo_directory_regexp ="([^/]+$)";
 
 	Git git = null;
 	CloneCommand cloneCommand = Git.cloneRepository();
@@ -35,14 +36,25 @@ public class Clone {
 	private void setDirectory(String command) {
 		pattern = Pattern.compile(directoryNotPresent_regexp);
 		matcher = pattern.matcher(command);
+		File directory = null;
 		if (!matcher.find()) {
 			pattern = Pattern.compile(directory_regexp);
 			matcher = pattern.matcher(command);
 			if (matcher.find()) {
-				File directory = new File(matcher.group().substring(5));
+				directory = new File(matcher.group().substring(5));
 				cloneCommand.setDirectory(directory);
 			}
 		}
+		else{
+			pattern = Pattern.compile(repo_directory_regexp);
+			matcher = pattern.matcher(command);
+			if (matcher.find()) {
+				System.out.println("entred a safe zone");
+				directory = new File(matcher.group().substring(0, matcher.group().length()-4));
+				cloneCommand.setDirectory(directory);
+			}
+		}
+		System.out.println("the directory is "+directory);
 	}
 
 	private void setOptions(String command) {
