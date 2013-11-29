@@ -29,7 +29,6 @@ public class Clone {
 		matcher = pattern.matcher(command);
 		if (matcher.find()) {
 			cloneCommand.setURI(matcher.group());
-			System.out.println(matcher.group());
 		}
 	}
 
@@ -49,12 +48,10 @@ public class Clone {
 			pattern = Pattern.compile(repo_directory_regexp);
 			matcher = pattern.matcher(command);
 			if (matcher.find()) {
-				System.out.println("entred a safe zone");
 				directory = new File(matcher.group().substring(0, matcher.group().length()-4));
 				cloneCommand.setDirectory(directory);
 			}
 		}
-		System.out.println("the directory is "+directory);
 	}
 
 	private void setOptions(String command) {
