@@ -7,18 +7,18 @@ CustomCLI is a simple CLI that can supports commands like git clone.
 
 Presently we support the following commands
 
-  * git clone uri
-  * git clone uri directory
+  * <code>git clone uri</code>
+  * <code>git clone uri directory</code>
   
 #####Installation
 
-Download all the dependencies by executing "mvn install" command in the project root directory.
+Download all the dependencies by executing <code>"mvn install"</code> command in the project root directory.
 
 
 #####Running
 
 Steps to be followed after the project is clone
 
- * Go to the project directory and execute 'mvn jetty:run' command
- * Type the following in the browser "http:\\localhost:8080\jgit"
+ * Go to the project directory and execute <code>'mvn jetty:run'</code> command
+ * Type the following in the browser <code>"http:\\localhost:8080\jgit"<code>
      
