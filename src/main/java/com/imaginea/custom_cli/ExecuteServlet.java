@@ -34,10 +34,14 @@ public class ExecuteServlet extends HttpServlet {
 		if (matcher.find()) {
 			Clone c = new Clone();
 			message = c.clone(command);
+		} else{
+			message = "Invalid commmand entered";
 		}
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.println(message);
+		if(message!=null){
+			out.println(message);
+		}
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
