@@ -12,15 +12,16 @@ function getPrompt() {
 	xmlHttpRequest.onreadystatechange = function() {
 		if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
 			prompt = xmlHttpRequest.responseText;
+			addInput();
 		}
 	}
 }
 
-function nextLine(e) {
+function addNewLine(e) {
 	if (e.keyCode === 13) {
-		var command = document.getElementById("cmd").value;
+		var command = document.getElementById("terminal").lastChild;
 		command.readOnly = true;
-		executeCommand(command);
+		executeCommand(command.value);
 	}
 }
 
@@ -37,32 +38,28 @@ function getXmlHttpRequestObject() {
 function executeCommand(input) {
 	rcvReq.onreadystatechange = function() {
 		if (rcvReq.readyState == 4 && rcvReq.status == 200) {
-			document.getElementById("output-message").innerHTML = rcvReq.responseText;
-			addNewLine();
+			addOutput(rcvReq.responseText);
 		}
 	}
 	rcvReq.open("GET", 'ExecuteServlet?input=' + input, true);
 	rcvReq.send();
 }
 
-function addNewLine() {
-	var div = document.createElement("div");
-	div.setAttribute("id", "terminal");
+function addOutput(message) {
+	var output = document.createElement("span");
+	output.setAttribute("id", "output-message");
+	output.innerText = message;
+	document.body.appendChild(output);
+	addInput();
+}
+
+function addInput(){
 	var promptText = document.createElement("span");
 	promptText.innerHTML = prompt;
 	promptText.setAttribute("id","prompt");
 	var input = document.createElement("input");
 	input.setAttribute("id", "cmd");
-	// input.setAttribute("onkeypress",nextLine(e));
-	// input.onkeypress = nextLine(e);
-	input.addEventListener("onkeypress", function() {
-		nextLine(event)
-	}, false);
-	var output = document.createElement("span");
-	output.setAttribute("id", "output-message");
-	div.appendChild(promptText);
-	div.appendChild(input);
-	div.appendChild(output);
-	document.body.appendChild(div);
-	console.log(prompt);
+	input.setAttribute("onkeypress", "nextLine(event)");
+	document.body.appendChild(promptText);
+	document.body.appendChild(input);
 }
