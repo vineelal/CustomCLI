@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ExecuteServlet extends HttpServlet {
-	private String message;
 	String userName = System.getenv("USER");
 	String machineName = null;
 
@@ -27,6 +26,7 @@ public class ExecuteServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String message = null;
 		String command = request.getParameter("input");
 		String clone_regexp = "git\\sclone";
 		Pattern pattern = Pattern.compile(clone_regexp);
@@ -35,12 +35,14 @@ public class ExecuteServlet extends HttpServlet {
 			Clone c = new Clone();
 			message = c.clone(command);
 		} else{
-			message = "Invalid commmand entered";
+			if(command.length()!=0){
+				message = "Invalid commmand entered";
+			}
 		}
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		if(message!=null){
-			out.println(message);
+			out.println("\n"+message);
 		}
 	}
 
