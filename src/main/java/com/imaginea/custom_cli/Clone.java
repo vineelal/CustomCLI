@@ -75,6 +75,6 @@ public class Clone {
 		} catch (JGitInternalException e){
 			return "Destination path already exists and is not an empty directory";
 		}
-		return "\nCloned into "+directory+" ...";
+		return "Cloned into "+directory+" ...";
 	}
 }
