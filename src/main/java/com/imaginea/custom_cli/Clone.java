@@ -32,10 +32,10 @@ public class Clone {
 		}
 	}
 
-	private void setDirectory(String command) {
+	private File setDirectory(String command) {
+		File directory = null;
 		pattern = Pattern.compile(directoryNotPresent_regexp);
 		matcher = pattern.matcher(command);
-		File directory = null;
 		if (!matcher.find()) {
 			pattern = Pattern.compile(directory_regexp);
 			matcher = pattern.matcher(command);
@@ -52,18 +52,20 @@ public class Clone {
 				cloneCommand.setDirectory(directory);
 			}
 		}
+	return directory;
 	}
 
-	private void setOptions(String command) {
+	private File setOptions(String command) {
 		setURI(command);
-		setDirectory(command);
+		File directory = setDirectory(command);
+		return directory;
 	}
 
 	public String clone(String command) {
-		setOptions(command);
+		File directory = setOptions(command);
 		try {
 			git = cloneCommand.call();
-			System.out.println("successfully cloned");
+			System.out.println("successfully cloned into "+directory);
 		} catch (InvalidRemoteException e) {
 			return "Invalid Remote";
 		} catch (TransportException e) {
@@ -73,6 +75,6 @@ public class Clone {
 		} catch (JGitInternalException e){
 			return "Destination path already exists and is not an empty directory";
 		}
-		return "Cloned......";
+		return "\nCloned into "+directory+" ...";
 	}
 }
