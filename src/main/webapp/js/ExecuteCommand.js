@@ -59,7 +59,7 @@ function addInput(){
 	promptText.setAttribute("id","prompt");
 	var input = document.createElement("input");
 	input.setAttribute("id", "cmd");
-	input.setAttribute("onkeypress", "nextLine(event)");
+	input.setAttribute("onkeypress", "addNewLine(event)");
 	document.body.appendChild(promptText);
 	document.body.appendChild(input);
 }
